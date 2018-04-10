@@ -1,0 +1,120 @@
+\documentclass{book}
+
+\usepackage{lipsum}
+\usepackage{color}
+\usepackage{amsmath}
+\usepackage{graphicx}
+
+\newcommand{\testcommand}{Hello}
+\newcommand{\anothertestcommand}[2]{Welcome, #2! Mighty #1!!!}
+
+\title{The \textit{First} \LaTeX ~\textbf{Project}}
+\author{Mahmudur Rahman}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\newpage
+
+\tableofcontents
+
+\newpage
+
+\chapter{Chapte 1}
+
+\section{Introduction}
+
+\subsection{Introductory text}
+This is the \textbf{first} CSE 300 class in Jan 2018 term.
+This is a new \textcolor{red}{\textbf{line}}.
+This is a new line.
+This is a new line.
+This is a new line.
+This is a new line.
+
+
+\subsection{Introductory text}
+\label{sec:intro_text}
+This is the \textbf{first} CSE 300 class in Jan 2018 term.
+This is a new \textcolor{red}{\textbf{line}}.
+This is a new line.
+This is a new line.
+This is a new line.
+This is a new line.
+
+\subsection{More introductory text}
+This is the first \textit{CSE 300} class in Jan 2018 term.
+This is a new line.
+This is a new line.
+This is a new line.
+This is a new line.
+This is a new line. This text is a continuation of Section \ref{sec:intro_text}.
+
+\section{Random Text}
+
+\lipsum
+
+\section{Making Lists}
+In this section, we will write various lists.
+
+\subsection{Itemize}
+
+This is an example of itemizing.
+
+\begin{itemize}
+    \item CSE 300
+    \item CSE 400
+\end{itemize}
+
+\subsection{Enumerating}
+
+This is an example of enumerating. Here, itens appear under numebrs.
+
+\begin{enumerate}
+    \item CSE 300
+    \item CSE 400
+\end{enumerate}
+
+\subsection{Describing}
+
+Example.
+
+\begin{description}
+    \item[CSE 300] Tech Writing
+    \item[CSE 400] Project and Thesis
+\end{description}
+
+
+\section{Equation}
+
+The famous equation of Newton can be summed up as: $F = ma$. THis is normal text. Following is the expansion of $e$ raised to the power of $x$.
+
+\begin{equation}
+    e ^ x = 1 + x + \frac{x ^ 2}{ 2 !} + \frac{x ^ 3}{3!} + \cdot \cdot \cdot ~ \infty
+    \label{eqn:e}
+\end{equation}
+
+Equation \ref{eqn:e} is the expansion of $e$. This can also be written as:
+
+\begin{equation}
+    e ^ x = \sum_{n=0}^{\infty} \frac{x ^ n}{n !}
+\end{equation}
+
+This is testing \testcommand. \anothertestcommand{Jon Snow}{Ice King}
+
+\section{Figures}
+
+Here, we will import figures. Figure \ref{fig:bl} is our figure.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width = 0.3\textwidth]{figures/logo.png}
+    \caption{BUET Logo}
+    \label{fig:bl}
+\end{figure}
+
+\lipsum
+
+\end{document}
