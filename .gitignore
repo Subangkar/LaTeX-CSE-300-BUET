@@ -2,6 +2,7 @@
 *.synctex.gz
 *.gz
 *.log
+*.toc
 
 
 
