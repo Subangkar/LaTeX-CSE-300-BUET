@@ -5,6 +5,8 @@
 *.toc
 
 
+*.orig
+
 
 *.driveupload
 *.ini
