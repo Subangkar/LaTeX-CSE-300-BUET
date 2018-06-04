@@ -1,0 +1,7 @@
+You have to recreate the given pdf.
+
+The images must be vector image.
+
+The images must be drawn with tikz.
+
+\includegraphics is not allowed.
