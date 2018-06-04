@@ -1,0 +1,51 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{array}
+\usepackage{subcaption}
+\usepackage[style=alphabetic, sorting=ynt]{biblatex}
+\usepackage{xparse}
+
+\addbibresource{example.bib}
+
+\newcommand{\something}[3][Yes]{only three things #1, #2 and #3}
+
+%\renewcommand{\testbf}{}
+
+\NewDocumentCommand{\test}{m O{No} O{Very good}}{#1, #2 and #3}
+
+\title{A1 Practice}
+\author{madhusudan.buet }
+\date{April 2018}
+
+\begin{document}
+
+\maketitle
+\section{Command Test}
+This is the example a new command. I know \something[No]{No}{Very Good}.\\
+This is test \test{Yes}[Yes][Yes].
+\section{Tables}
+The following one\ref{tab:1} is an example of a sample table.
+\begin{table}[h!]
+\centering
+\begin{tabular}{| >{\raggedright}m{2cm} | m{2cm} | m{2cm} |}
+\hline
+Name of the batsman & \multicolumn{2}{c|}{Statistics}\\
+\hline
+Tamim & 102 & 17 \\ 
+\hline
+Kayes & 17 & 22\\
+\hline
+\end{tabular}
+\caption{Cricket Match Statistics}
+\label{tab:1}
+\end{table}
+
+
+\section{Comparison}
+The work \cite{Wang:2004} did not cover this issue. The works \cite{Pei:2004} and \cite{Han:2000} partially covered this but my work is the best one.
+
+\printbibliography[]
+%\bibliographystyle{alpha}
+%\bibliography{example}
+
+\end{document}
