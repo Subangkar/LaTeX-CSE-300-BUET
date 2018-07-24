@@ -1,0 +1,86 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{array}
+\usepackage{subcaption}
+\usepackage[style = alphabetic, sorting=ynt]{biblatex}
+\usepackage{xparse}
+
+\addbibresource{example.bib}
+
+%\newcommand{\everything}[3][No]{only #1, #2 and #3.}
+
+\NewDocumentCommand{\everything}{O{Yes} m O{Very Good}}{only #1 , #2 and #3}
+
+\title{B2 Practice}
+\author{madhusudan.buet }
+\date{April 2018}
+
+\begin{document}
+
+\maketitle
+\listoftables
+\section{Command}
+We will see a sample command. I know \everything[No]{No}[Yes]
+\section{Introduction to Table}
+See the first table (Table \ref{tab:1}).! \newline
+\begin{table}[h!]
+\centering
+\begin{tabular}{|| m{2cm} | m{2cm} | m{3cm} ||}
+\hline
+   Name of the batsman & \multicolumn{2}{c|}{Statistics}\\
+   \hline
+   \hline
+   Tamim & 80 & 30\\
+   \hline
+   Imrul & 30 & 80\\
+   \hline
+\end{tabular}
+\caption{This is a happy table}
+\label{tab:1}
+\end{table}
+
+The following table contains two subtables. 
+\begin{table}[]
+\centering
+    \begin{subtable}{0.7\textwidth}
+    \centering
+        \begin{tabular}{|| m{2cm} | m{2cm} | m{3cm} ||}
+            \hline
+            Name of the batsman & \multicolumn{2}{c|}{Statistics}\\
+            \hline
+           \hline
+           Tamim & 80 & 30\\
+           \hline
+           Imrul & 30 & 80\\
+           \hline
+        \end{tabular}
+        \caption{First subtable}
+        \label{subtab:1}
+    \end{subtable}
+    \begin{subtable}{0.7\textwidth}
+        \begin{tabular}{|| m{2cm} | m{2cm} | m{3cm} ||}
+            \hline
+            Name of the batsman & \multicolumn{2}{c|}{Statistics}\\
+            \hline
+           \hline
+           Tamim & 80 & 30\\
+           \hline
+           Imrul & 30 & 80\\
+           \hline
+        \end{tabular}
+        \caption{Second subtable}
+        \label{subtab:2}
+    \end{subtable}
+    \caption{Full and Happy Table}
+    \label{tab:2}
+\end{table}
+
+\section{Bibliography}
+My paper is better than \cite{Han:2000}. But in some cases, my paper is not as good as the work \cite{Pei:2000}. I do not know about the recent work \cite{Aditya:2017}.
+
+%\bibliographystyle{unsrt}
+%\bibliography{example}
+
+\printbibliography
+
+\end{document}

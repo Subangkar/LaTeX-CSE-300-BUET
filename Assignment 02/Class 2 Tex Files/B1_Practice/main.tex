@@ -1,0 +1,113 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{array}
+\usepackage{tabu}
+\usepackage{multirow}
+\usepackage{subcaption}
+\usepackage{biblatex}
+
+\addbibresource{example.bib}
+
+\title{B1 Practice}
+\author{Madhusudan Basak}
+\date{April 2018}
+
+\begin{document}
+
+\maketitle
+
+\section{Table Creation}
+The following one (Table \ref{tab:1}) is the example of a sample table.
+\begin{table}[h!]
+\centering
+    \begin{tabular}{||m{2cm}| m{2cm}| m{2cm}||}
+    \hline
+    Name of the batsman & \multicolumn{2}{c|}{Statistics} \\
+    \hline
+    \hline
+    Tamim Iqbal & 100 & 80 \\
+    \hline
+    Soumya Sarkar & 80 & 70 \\
+    \hline
+    \end{tabular}
+    \caption{Cricket Match}
+    \label{tab:1}
+\end{table}
+
+
+The following one (Table \ref{tab:2}) is an example of multiple row.
+
+\begin{table}[h!]
+\centering
+    \begin{tabular}{|c|c|c|}
+    \hline
+    Name of the batsman & Runs & Balls \\
+    \hline
+    \multirow{2}{*}{First two Batsmen} & 100 & 80 \\
+    
+    & 80 & 70 \\
+    \hline
+    \end{tabular}
+    \caption{Cricket Match}
+    \label{tab:2}
+\end{table}
+
+Now we will see two subtables under one caption:
+
+\begin{table}[t!]
+    \centering
+    \begin{subtable}[t]{0.5\textwidth}
+    \centering
+        \begin{tabular}{||m{2cm}| m{2cm}| m{2cm}||}
+        \hline
+        Name of the batsman & \multicolumn{2}{c|}{Statistics} \\
+        \hline
+        \hline
+        Tamim Iqbal & 100 & 80 \\
+        \hline
+        Soumya Sarkar & 80 & 70 \\
+        \hline
+        \end{tabular}
+        \caption{Subtable 1 of the match}
+        \label{subtab:1}
+    \end{subtable}
+    \begin{subtable}{0.5\textwidth}
+    \centering
+        \begin{tabular}{|c|c|c|}
+        \hline
+        Name of the batsman & Runs & Balls \\
+        \hline
+        \multirow{2}{*}{First two Batsmen} & 100 & 80 \\
+        
+        & 80 & 70 \\
+        \hline
+        \end{tabular}
+        \caption{Subtable 2}
+        \label{subtab:2}
+    \end{subtable}
+    \caption{Full and Happy Table}
+    \label{tab:3}
+\end{table}
+
+
+
+Following is the example of total table having a fixed width.
+
+\begin{tabu}to 0.8\textwidth{|X[c]|X[l]|X[r]|}
+\hline
+Name of the batsman & Runs & Balls \\[1ex]
+\hline
+\hline
+Tamim Iqbal & 100 & 80 \\
+\hline
+Soumya Sarkar & 80 & 70 \\
+\hline
+\end{tabu}
+
+\section{Referring the Papers}
+This paper\cite{Han:2000} did not introduce it.
+\printbibliography
+%\bibliographystyle{unsrt}
+%\bibliography{example.bib}
+
+\end{document}

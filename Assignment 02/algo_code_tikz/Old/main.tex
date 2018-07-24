@@ -1,0 +1,56 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{subfiles}
+\usepackage{lipsum}
+\usepackage[linesnumbered,algoruled,boxed]{algorithm2e}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{tikz}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{blue},
+    basicstyle=\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=right,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=8
+}
+
+\lstset{style=mystyle}
+
+\title{figs}
+\author{Mahmudur Rahman}
+\date{May 2018}
+
+\begin{document}
+
+\maketitle
+
+\section{Algorithm}
+\subfile{sections/algo.tex}
+
+\section{Code}
+\subfile{sections/code.tex}
+
+\section{Figures}
+\subfile{sections/pictures.tex}
+
+\section{Introduction}
+\subfile{sections/intro.tex}
+
+\end{document}

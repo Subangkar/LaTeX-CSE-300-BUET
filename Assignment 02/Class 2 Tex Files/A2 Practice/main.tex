@@ -1,0 +1,86 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{array}
+\usepackage{subcaption}
+\usepackage[style=alphabetic, sorting=nty]{biblatex}
+\usepackage{xparse}
+
+\newcommand{\everything}[3][NO]{\textbf{#1}, #2 and #3}
+\NewDocumentCommand{\everything}{O{Yes} m O{very good}}{only #1, #2 and #3}
+
+\renewcommand{\everything}
+
+\addbibresource{example.bib}
+
+\title{A2 Practice}
+\author{madhusudan.buet }
+\date{April 2018}
+
+\begin{document}
+
+\maketitle
+\listoftables
+\section{Commands}
+I know \everything[No]{No}[No].
+\section{Introduction to Tables}
+See the first table (Table \ref{tab:1})!
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|| p{2cm} | p{3cm} | p{2cm} ||}
+        \hline
+        Name of the Batsman & \multicolumn{2}{c||}{Statistics} \\
+        \hline
+        \hline
+        Tamim & 102 & 17\\
+        \hline
+        Mominul & 80 & 50\\
+        \hline
+    \end{tabular}
+    \caption{Example Table}
+    \label{tab:1}
+\end{table}
+
+The full table \ref{tab:2} contains two subtables: Subtable \ref{subtab:1} and \ref{subtab:2}.
+
+\begin{table}
+    \begin{subtable}{0.7\textwidth}
+        \begin{tabular}{|| p{2cm} | p{3cm} | p{2cm} ||}
+            \hline
+            Name of the Batsman & \multicolumn{2}{c||}{Statistics} \\
+            \hline
+            \hline
+            Tamim & 102 & 17\\
+            \hline
+            Mominul & 80 & 50\\
+            \hline
+        \end{tabular}
+        \caption{First Table}
+        \label{subtab:1}
+    \end{subtable}
+    \begin{subtable}{0.7\textwidth}
+        \begin{tabular}{|| p{2cm} | p{3cm} | p{2cm} ||}
+            \hline
+            Name of the Batsman & \multicolumn{2}{c||}{Statistics} \\
+            \hline
+            \hline
+            Tamim & 102 & 17\\
+            \hline
+            Mominul & 80 & 50\\
+            \hline
+        \end{tabular}
+        \caption{Second Table}
+        \label{subtab:2}
+    \end{subtable}
+    \caption{Full and Happy Table}
+    \label{tab:2}
+\end{table}
+
+\section{Referring the Papers}
+
+My work is better than Han's work\cite{Han:2000} and Aggrawal's work\cite{Aggarwal:2009} But slighly worse than Leung's work \cite{Leung:2008} :(
+
+\printbibliography[title={Hello World}]
+%\bibliographystyle{unsrt}
+%\bibliography{example}
+
+\end{document}

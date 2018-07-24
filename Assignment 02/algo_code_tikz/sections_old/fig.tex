@@ -1,0 +1,25 @@
+Here, we will generate images using TikZ. Later, we will study Gnuplot and Inkscape as well.
+
+\begin{figure}[h]
+    \centering
+    \begin{tikzpicture}[scale=0.5]
+        %\draw [ultra thick, help lines] (-10,-10) grid (10,10);
+        %\draw [line width=2pt, rounded corners, fill=red] (0,0) rectangle (3,5);
+        \path [fill=yellow] (0,4.5) to [out=0,in=180] (10,1) -- (10,0) -- (0,0) -- (0,4.5);
+        \draw [line width=2pt, <->] (-10,0) -- (10,0);
+        \draw [line width=2pt, <-] (0,7) -- (0,0);
+        %\draw [blue, line width=4pt, <->] (0,0) -- (5,5) -- (-5,5) -- (-5,-2);
+        %\draw [blue, line width=5pt, fill=blue] (7,7) circle [radius=.1];
+        %\draw [red, domain=-4*pi:4*pi, line width=3pt, samples=100] plot (\x,{5*sin(\x r/2)});
+        \draw [line width=1pt] (-10,1) to [out=0,in=180] (0,4.5) to [out=0,in=180] (10,1);
+        
+        \node [above] at (0,7) {$f(x)$};
+        \node [right] at (10,0) {$x$};
+        
+        \draw [->, line width=2pt](1,2) to [in=180, out=-90] (4,-2);
+        
+        \node [right] at (4,-2) {$A = \int_0^{\infty}f(x) dx$};
+        
+    \end{tikzpicture}
+    \caption{Test}
+\end{figure}
