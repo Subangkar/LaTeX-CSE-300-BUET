@@ -1,0 +1,384 @@
+\documentclass{report}
+\usepackage[utf8]{inputenc}
+\usepackage{array}
+\usepackage{color}
+\usepackage{hyperref}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{listings}
+% \usepackage{algpseudocode}
+% \usepackage{algorithm2e}
+
+\newcommand{\RNum}[1]{\uppercase\expandafter{\romannumeral #1\relax}}
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+
+\title{
+\line(1,0){300}
+\endgraf\bigskip
+\Huge
+% \bfseries{A Report on}
+% \endgraf\bigskip
+\emph{Longest Common Subsequence}
+\newline
+\line(1,0){300}
+\bigskip
+\bigskip
+}
+
+\author{
+\Large{Subangkar Karmaker}\\
+\Large{Student ID : 1505015}
+}
+
+\date{
+\endgraf\bigskip
+\Large{\today}
+}
+
+\newcommand{\TripleRowDoubleCol}[6]{
+    \begin{center}
+    \begin{tabular}{|c|c|}
+     \hline
+     #1 & #2\\\hline
+     #3 & #4\\\hline
+     #5 & #6\\\hline
+    \end{tabular}
+    \end{center}
+}
+
+\begin{document}
+
+\maketitle
+\renewcommand{\familydefault}{\sfdefault}
+
+\tableofcontents
+
+\chapter{Introduction}
+This report briefly illustrates the well known problem \textit{Longest Common Subsequence}. Longest Common Subsequence, in short LCS is the problem of finding the common subsequence of some sequences that has the longest length among all other subsequences of them.
+
+\bigskip
+Basically in LCS, we find longest common subsequence of two string. We can also find longest common subsequence of more than two strings but that is much more complicated. So here we will limit out discussion to finding longest common subsequence of two string.
+
+\bigskip
+So in this problem we will have two string as input and our output will be a single string that is the longest common subsequence of the above two.  
+\newpage
+
+
+\chapter{Subsequence}{\label{chap:subseq}}
+% \section*{1. Form the possessive singular of nouns with ’s}
+% \addcontentsline{toc}{section}{1. Form the possessive singular of nouns with ’s}
+\section{Subsequence}{
+\bigskip
+\subsection{Definition:}
+Given two sequences $X$ = $\langle$ $x_1$, $x_2$,...,$x_m$ $\rangle$ and $Z$  = $\langle$ $z_1$, $z_2$,...,$z_k$ $\rangle$, we say that $Z$ is a subsequence of $X$ if there is a strictly increasing sequence of $k$ indices $i_1$, $i_2$,...,$i_k$  $(1$ $\leq$ $i_1$ $<$ $i_2$ $<$ ... $<$ $i_k$ $\leq$ $m$) such that $Z$ = $\langle$ $x_{i_1}$, $x_{i_2}$,..., $x_{i_k}$ $\rangle$.\\
+
+Informally sequential elements in subsequence must have strictly increasing sequence in the original sequence.
+\bigskip
+}
+
+\subsection{Example of Subsequences:}{
+\bigskip
+\flushleft{Let's consider a string $X=$ $\langle$BEGINNING$\rangle$\\}
+\centering{
+\TripleRowDoubleCol{\textbf{Main Sequence}}{$\langle$BEGINNING$\rangle$}
+{\textbf{Subsequences}}{$\langle$BGN$\rangle$, $\langle$INNING$\rangle$, $\langle$BIS$\rangle$ etc.}
+{\textbf{Not Subsequence}}{~$\langle$EBG$\rangle$, $\langle$NINNIG$\rangle$, $\langle$BGL$\rangle$ etc.}
+}
+\bigskip
+\flushleft{Let's consider another string $Y=$ $\langle$BACDB$\rangle$\\}
+\centering{
+\TripleRowDoubleCol{\textbf{Main Sequence}}{$\langle$BACDB$\rangle$}
+{\textbf{Subsequences}}{$\langle$BDB$\rangle$, $\langle$CDB$\rangle$, $\langle$BCB$\rangle$ etc.}
+{\textbf{Not Subsequence}}{~$\langle$DCA$\rangle$, $\langle$BDA$\rangle$, $\langle$CDA$\rangle$ etc.}
+}}
+
+\newpage
+
+\section{Longest Common Subsequence}{
+\bigskip
+A longest common subsequence is any string that is of the longest length among any common subsequences. Obviously there can be more than on subsequence with the longest length. In that case any of those subsequences is a optimal solution by definition. Here are some examples,
+\begin{enumerate}
+    \bigskip
+    \item {\textbf{Original Sequences:} $S$ = $\langle$BDCB$\rangle$,  $T$ = $\langle$BACDB$\rangle$}
+        \begin{itemize}
+            \item {\textbf{Common Subsequences:} $\langle$B$\rangle$, $\langle$BD$\rangle$, $\langle$BCB$\rangle$ etc.}
+            \item {\textbf{Longest Common Subsequence:} $\langle$BCB$\rangle$}
+        \end{itemize}
+    \bigskip
+    \item {\textbf{Original Sequences:}} $S$ = $\langle$DABKC$\rangle$,  $T$ = $\langle$APBCK$\rangle$
+        \begin{itemize}
+            \item \textbf{Common Subsequences:} $\langle$A$\rangle$, $\langle$AB$\rangle$, $\langle$ABK$\rangle$, $\langle$ABC$\rangle$ etc.
+            \item \textbf{Longest Common Subsequence:} $\langle$ABK$\rangle$, $\langle$ABC$\rangle$
+        \end{itemize}
+    \bigskip
+    \item {\textbf{Original Sequences:}} $S$ = $\langle$ABCD$\rangle$,  $T$ = $\langle$PQRS$\rangle$
+        \begin{itemize}
+            \item \textbf{Common Subsequences:} NO common subsequences
+            \item \textbf{Longest Common Subsequence:} NO longest common subsequences
+        \end{itemize}
+\end{enumerate}    
+    
+
+}
+
+\newpage
+
+
+\chapter{Problem Solving Techniques}
+\bigskip
+There are many well established methodology and algorithms for problem solving.
+Brute force technique, Divide and conquer, Dynamic Programming are some popular examples of such methodologies. Here we will discuss Brute force technique and Dynamic Programming approach as both of them are relevant to our problem.
+\bigskip
+\section{Brute Force Technique}
+Brute force is a type of algorithm that tries a large number of patterns to solve a problem. It is often mentioned as \textit{Brute Force Search} or \textit{Exhaustive Search}. Brute Force Search is a very general problem-solving technique that consists of systematically enumerating all possible candidates for the solution and checking whether each candidate satisfies the problem's statement.\\
+For example, a brute-force algorithm to find the divisors of a natural number n would enumerate all integers from 1 to n, and check whether each of them divides n without remainder. A brute-force approach for the eight queens puzzle would examine all possible arrangements of 8 pieces on the 64-square chessboard, and, for each arrangement, check whether each (queen) piece can attack any other.
+
+\bigskip
+While a brute-force search is simple to implement, and will always find a solution if it exists, its cost is proportional to the number of candidate solutions – which in many practical problems tends to grow very quickly as the size of the problem increases. Therefore, brute-force search is typically used when the problem size is limited, or when there are problem-specific heuristics that can be used to reduce the set of candidate solutions to a manageable size. The method is also used when the simplicity of implementation is more important than speed.
+
+\subsection*{Basic algorithm}
+In order to apply brute-force search to a specific class of problems, one must implement four procedures, first,next, valid, and output. These procedures should take as a parameter the data P for the particular instance of the problem that is to be solved, and should do the following:
+
+\begin{enumerate}
+    \item first (P): generate a first candidate solution for P.
+    \item next (P, c): generate the next candidate for P after the current one c.
+    \item valid (P, c): check whether candidate c is a solution for P.
+    \item output (P, c): use the solution c of P as appropriate to the application.
+\end{enumerate}
+
+The next procedure must also tell when there are no more candidates for the instance P, after the current one c. A convenient way to do that is to return a "null candidate", some conventional data value $\land$ that is distinct from any real candidate. Likewise the first procedure should return $\land$ if there are no candidates at all for the instance P. The brute-force method is then expressed by the algorithm.
+???????\\
+???????\\
+???????
+% \begin{algorithmic}
+% \State $c \gets first(P)$
+% \While{ $c \neq \land$}{
+%     \IF{valid(P,c)}{output(P, c)\;}
+%     \State $c \gets next(P,c)$
+% }
+% \end{algorithmic}
+
+\newpage
+\section{Dynamic Programming Approach}
+\bigskip
+Dynamic programming is both a mathematical optimization method and a computer programming method. The method was developed by Richard Bellman in the 1950s.
+In both contexts it refers to simplifying a complicated problem by breaking it down into simpler sub-problems in a recursive manner. While some decision problems cannot be taken apart this way, decisions that span several points in time do often break apart recursively. Likewise, in computer science, if a problem can be solved optimally by breaking it into sub-problems and then recursively finding the optimal solutions to the sub-problems, then it is said to have optimal substructure.
+\bigskip
+\subsection{Applicability for DP}
+There are two key attributes that a problem must have in order for dynamic programming to be applicable. Those are 
+\begin{itemize}
+    \item {Optimal Substructure} 
+    \item {Overlapping Sub-Problems}
+\end{itemize}
+If a problem can be solved by combining optimal solutions to non-overlapping sub-problems, the strategy is called "divide and conquer" instead of dynamic programming. This is why merge sort and quick sort are not classified as dynamic programming problems.
+
+
+\newpage
+
+\newpage
+
+\chapter{A FEW MATTERS OF FORM}
+\begin{itemize}
+  \item
+   \textbf{\Large{Headings:}}\\
+    After the title or heading of a manuscript, we should leave a blank line, or its equivalent in space. We should begin on the first line on succeeding pages.
+    \bigskip
+    
+  \item
+   \textbf{\Large{Numerals:}}\\
+    We should not spell out dates or other serial numbers. Rather we should write them in figures or in Roman notations.
+    \DoubleRowDoubleCol{Theorem 5}{September 1, 1997}{Verse \RNum{27}}{2nd boy}
+    \bigskip
+
+  \item
+   \textbf{\Large{Parentheses:}}\\
+    We should punctuate a sentence containing an expression in parenthesis 
+    outside of the marks of parenthesis, exactly as if the expression in parenthesis
+    were absent. We should punctuate the expression within the prenthesis as if it stood by itself.
+    \DoubleRowSingleCol
+    {The general summoned his force (the 8th battalion) and left the war.}
+    {He tried to save his country (I don't know the name), but he failed.}
+    \bigskip
+
+  \item
+   \textbf{\Large{Quotations:}}\\
+    We should introduce Formal quotations, cited as documentary evidence, by a colon and enclose them in quotation marks.
+    \SingleRowSingleCol{The motto of the school is : "Truth shall prevail."}
+    \newpage
+    If quotations are in apposition or in the direct objects of verb, then they are preceded by a comma and enclosed in quotation marks.
+    \SingleRowSingleCol{Kate asked, "Will you go ?"}
+
+   \textbf{Exception:}\\
+    Quotations of an entire line or more, of verse, quotations introduced by 'that' and quotations containing proverbial expressions and familiar phrases of literary origin does not require any parentheses.
+    
+    \begin{center}
+    \begin{tabular}{|C{6cm}|}
+     \hline
+     Charles Dickens wrote :
+     \\Keep me through this night of peril
+     \\Underneath its boundless shade;\\\hline
+     I said that I wil change the system.\\\hline
+    \end{tabular}
+    \end{center}
+    \bigskip
+
+  \item
+   \textbf{\Large{References:}}\\
+    We should abbreviate titles that occur frequently and give the full forms in an alphabetical list at the end, in scholarly work requiring exact references. We should give the references in parenthesis or in footnotes, not in the body of the sentence. We should avoid words like act, scene, line, book, volume, page, except etc.
+    
+    \begin{center}
+    \begin{tabular}{|C{5.5cm}|C{5.5cm}|}
+     \hline
+     The chapter of a big hero ended with the defeat
+     of Napoleon in the battle of Waterloo (ref:1).
+     & (Footnote) 1. The battle of Waterloo : fought on Sunday, 18 June 1815,
+     near Waterloo in present-day Belgium.\\\hline
+    \end{tabular}
+    \end{center}
+    \bigskip
+    
+   \item
+    \textbf{\Large{Titles:}}\\
+    For the titles of literary works, We should prefer italics with capitalized initials.
+    Also, Roman with capitalized initials and with or without quotation marks can be used.
+
+    \begin{center}
+    \begin{tabular}{|C{6cm}|}
+     \hline
+     \textit{Harry Potter and the Prisoner of Azkaban, Around the World in Eighty Days,
+     The Passage, The Sun Also Rises, The Wind in the Willows.}\\\hline
+    \end{tabular}
+    \end{center}
+    
+    \newpage    
+\end{itemize}
+
+
+\chapter{WORDS AND EXPRESSIONS COMMONLY MISUSED}
+
+Some words in English language are commonly mistaken frequently. These mistakes arises when proper care is not taken while writing. the proper correction for these mistakes is not the replacement of one word or set of words by another, but the replacement of vague generality by definite statement.
+\bigskip
+
+\begin{itemize}
+    \item
+    \textbf{\Large{Allude:}}
+    
+    \textit{Allude} means \textit{to suggest or call attention to indirectly}, not \textit{Elude} or \textit{to evade or escape from something in a cunning way}.
+    \DoubleRowSingleCol
+    {Correct : You allude to a book}
+    {Correct: You elude a pursuer.}
+    
+    \bigskip
+    
+    \item
+    \textbf{\Large{Clever:}}\\
+    \textit{Clever} means \textit{ingenious} when applied to people, but when applied to horses, it means \textit{a good-natured one}.
+    
+    \DoubleRowSingleCol
+    {Statement : Mr. Brown is a clever guy (means the person is cunning)}
+    {Statement : The horse is very clever. (means the horse is obedient.)}
+    \bigskip
+
+    \item
+    \textbf{\Large{Disinterested :}}\\
+    \textit{Disinterested} means unbiased and does not mean \textit{uninterested}.
+    
+    \DoubleRowSingleCol
+    {Correct : The dispute should be resolved by a disinterested judge.}
+    {Correct : Why are you so uninterested in my story ?}
+     
+    \newpage
+    
+    \item
+    \textbf{\Large{Farther:}}\\
+    
+    \textit{Farther} is commonly interchanged with \textit{further}. But they have different meaning. \textit{farther} is a word implying distance, while \textit{further} is a measurement of time or quantity.
+    
+    \DoubleRowSingleCol
+    {Correct : You chase a ball farther than the other fellow.}
+    {Correct: You pursue a subject further.}
+        .
+    \item
+    \textbf{\Large{In terms of:}}\\
+    
+    \textit{In terms of} actually does not make much important meaning to the reader. It is better if it is omitted.
+    \DoubleRowSingleCol
+    {Correct : Let's talk in terms of science.}
+    {Better: Let's talk scientifically.}
+    \bigskip
+
+    \item
+    \textbf{\Large{Appraise :}}\\    
+    \textit{Appraise} means to ascertain the value of and does not mean to \textit{apprise}.
+    \DoubleRowSingleCol
+    {Correct: I appraised the jewels.}
+    {Correct : I apprised him of the situation.}
+    \bigskip
+    
+    \item
+    \textbf{\Large{Bemused :}}\\    
+    \textit{Bemused} means bewildered and does not mean \textit{amused.}
+
+    \DoubleRowSingleCol
+    {Correct: The unnecessarily complex plot left me bemused.}
+    {Correct : The silly comedy amused me.}
+    \bigskip
+    
+    \item
+    \textbf{\Large{Depreciate :}}\\  
+    \textit{Depreciate} means to decrease in value and does not mean to \textit{deprecate} or to disparage.
+    
+    \DoubleRowSingleCol
+    {Correct: My car has depreciated a lot over the years.}
+    {Correct : She deprecated his efforts.}
+\end{itemize}
+
+
+\chapter{WORDS OFTEN MISSPELLED}
+Some words in English are error-prone and complex in structure. A short list of them is presented below:
+
+\bigskip
+\fontsize{15}{18}
+
+\begin{center}
+\begin{tabular}{c c c}
+ aggression & irresistible & principal\\
+ apparently	& intelligence & questionnaire \\
+ argument & jewelry & receipt\\
+ beginning & kernel & rhyme\\
+ bizarre & leisure & rhythm \\
+ cemetery & liaison & sergeant \\
+ colleague & lieutenant & supersede\\
+ committee & maintenance & threshold\\
+ dilemma & maneuver & tyranny\\
+ ecstasy & medieval & vacuum\\
+ Fahrenheit & minuscule & weather\\
+ fluorescent & mischievous & weird\\
+ foreign & misspell & xylophone\\
+ foreseeable & occasionally & yacht\\
+ gist & perseverance & zebra\\
+ interrupt & personnel & zephyr\\
+\end{tabular}
+\end{center}
+\bigskip
+
+\chapter{CONCLUSION}{
+    \textit{Elements of Style} is a unique book on rules for composition writing. it gives in brief space the principal requirements of plain English style and concentrates attention on the rules of usage and principles of composition most commonly violated.
+    
+    \bigskip
+    
+    Despite its brief and well-structured features, this book is not completely well-explained on all topics. A little more rich collection of examples can make this book more helpful for the readers and writers.
+    
+    \bigskip
+    
+    As a basic textbook for learning composition writing and overcoming common mistakes, this book is a very good choice.
+    
+    \bigskip
+    
+    For any query, please contact : 
+    \href{http://aniksarkerbuet1997@gmail.com}{\textcolor{blue}{aniksarkerbuet1997@gmail.com}}
+}
+
+\end{document}
