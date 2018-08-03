@@ -252,7 +252,44 @@
     The LCS\_LENGTH(X,Y) algorithm takes $X=\langle x_1x_2..x_m\rangle$ and $Y = \langle y_1y_2...y_n\rangle$ as inputs and then outputs two matrices c[0..m, 0..n] and b[1..m, 1..n]. c[i,j] stores the length of LCS($X_i$, $Y_j$) and b[i,j] stores where c[i,j] gets its value from (this will be explained later). At the end of the algorithm, the length of LCS(X,Y) will be stored at c[m,n].
     
     \subfile{LCS_LENGTH.tex}
-    \newpage
+    % \newpage
+    \begin{table}
+    \centering
+        \begin{subtable}
+        \begin{tabular}{|c|c|c|c|c|c|c|}
+        \hline
+            & j & 0 & 1 & 2 & 3 & 4 \\ \hline
+            i &  & y & D & B & P & T \\ \hline
+            0 & x & 0 & 0 & 0 & 0 & 0 \\ \hline
+            1 & A & 0 & 0 & 0 & 0 & 0 \\ \hline
+            2 & D & 0 & 1 & 1 & 1 & 1 \\ \hline
+            3 & A & 0 & 1 & 1 & 1 & 1 \\ \hline
+            4 & P & 0 & 1 & 1 & 2 & 2 \\ \hline
+            5 & T & 0 & 1 & 1 & 2 & 3 \\ \hline
+        \end{tabular}
+        \caption{table c}
+        \end{subtable}
+        % \caption{Caption}
+    % \end{table}
+    % \begin{table}
+    % \centering
+        \bigskip
+        \begin{subtable}
+        \begin{tabular}{|c|c|c|c|c|c|c|}
+        \hline
+              & j & 0 & 1 & 2 & 3 & 4 \\ \hline
+            i &   & y & D & B & P & T \\ \hline
+            0 & x & 0 & 0 & 0 & 0 & 0 \\ \hline
+            1 & A & 0 & \uparrow & \uparrow & \uparrow & \uparrow \\ \hline
+            2 & D & 0 & \nwarrow & \leftarrow & \leftarrow & \leftarrow \\ \hline
+            3 & A & 0 & \uparrow & \uparrow & \uparrow & \uparrow \\ \hline
+            4 & P & 0 & \uparrow & \uparrow & \nwarrow & \leftarrow \\ \hline
+            5 & T & 0 & \uparrow & \uparrow & \uparrow & \nwarrow \\ \hline
+        \end{tabular}
+        \caption{table b}
+        \end{subtable}
+        \caption{tables for strings X=$\langle$ADAPT$\rangle$ and Y=$\langle$DBPT$\rangle$}
+    \end{table}
     \section{Construct the LCS}
     With the help of matirx b from LCS\_LENGTH, we can construct the LCS of X and Y. Starting from b[m,n], we can navigate the matrix according to the direction of each 'arrow':
     \begin{itemize}
@@ -261,7 +298,6 @@
         \item when b[i,j] = \leftarrow,~it~means~LCS($X_i,Y_j$) is the same as LCS(X$_i$,Y$_j$)
     \end{itemize}
     \subfile{PRINT-LCS.tex}
-    \newpage
     E.g., for two sequences X=$\langle$ADAPT$\rangle$ and Y=$\langle$DBPT$\rangle$, the results of LCS\_LENGTH() and PRINT-LCS() can be shown as:\\\\
     \subfile{SOLN_TABLE.tex}
     \bigskip
