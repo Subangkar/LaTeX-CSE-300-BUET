@@ -265,7 +265,7 @@
     E.g., for two sequences X=$\langle$ADAPT$\rangle$ and Y=$\langle$DBPT$\rangle$, the results of LCS\_LENGTH() and PRINT-LCS() can be shown as:\\\\
     \subfile{SOLN_TABLE.tex}
     \bigskip
-    Lets explain this diagram. Firstly, LCS\_LENGTH() computes matrix c and matrix b from X and Y, and the cell at the ith row and jth column stores the value of c[i,j] and the arrow pointing to next entry of b. At c[5,4], number 3 stands for the length of LCS$\langle DPT \rangle$. To re-construct the LCS, we just need to follow the arrow from the lower right corner. Each \nwarrow on~the~path~denotes~an~element~of~the~LCS.
+    Lets explain this diagram. Firstly, LCS\_LENGTH() computes matrix c and matrix b from X and Y, and the cell at the ith row and jth column stores the value of c[i,j] and the arrow pointing to next entry of b. At c[5,4], number 3 stands for the length of LCS$\langle DPT \rangle$. To re-construct the LCS, we just need to follow the arrow from the lower right corner. Each $\nwarrow$ on the path denotes an element of the LCS.
     
     
     So, according to the diagram, the procedure will finally print out: "DPT"
