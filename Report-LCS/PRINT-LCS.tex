@@ -1,0 +1,21 @@
+\SetNlSty{}{}{}
+
+\let\oldnl\nl% Store \nl in \oldnl
+\newcommand\nonl{%
+  \renewcommand{\nl}{\let\nl\oldnl}}% Remove line number for one line
+
+
+\begin{algorithm}
+\SetKwFunction{printlcs}{\textsc{Print}-LCS}
+\Indm\nonl\printlcs{$b,X,i,j$}\\
+\Indp
+  \If{$i=0$ or $j=0$}{\KwRet{}}
+  \If{$b[i,j]=\text{``}\nwarrow\hspace{-3pt}\text{''}$}{
+    \printlcs{$b,X,i-1,j-1$}\\
+    print $x_i$
+  }
+  \ElseIf{$b[i,j]=\text{``}\uparrow\hspace{-3pt}\text{''}$}{
+    \printlcs{$b,X,i-1,j$}
+  }
+  \Else{\printlcs{$b,X,i,j-1$}}
+\end{algorithm}
