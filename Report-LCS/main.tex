@@ -244,15 +244,15 @@
           c[i-1, j-1] & \text{if $i,j > 0$ and $x_i$ = $y_j$ } \\
           max(c[i-1, j], c[i, j-1]) & \text{if $i,j > 0$ and $x_i$  $\neq$ $y_j$ } 
        \end{cases} \]
-    
+       
+    \bigskip
     \section{Computing length of the LCS}
     Using the recursive formula defined above, we can easily contrive an algorithm to compute c[i,j], but the execution time will grow exponentially with the length of input. Since there are only $\Theta(m*n)$ subproblems in the subproblem space, we can use the bottom-up approach to improve efficiency.
     
     \bigskip
     The LCS\_LENGTH(X,Y) algorithm takes $X=\langle x_1x_2..x_m\rangle$ and $Y = \langle y_1y_2...y_n\rangle$ as inputs and then outputs two matrices c[0..m, 0..n] and b[1..m, 1..n]. c[i,j] stores the length of LCS($X_i$, $Y_j$) and b[i,j] stores where c[i,j] gets its value from (this will be explained later). At the end of the algorithm, the length of LCS(X,Y) will be stored at c[m,n].
-    
     \subfile{LCS_LENGTH.tex}
-    % \newpage
+    
     \begin{table}
     \centering
         \begin{subtable}
@@ -269,10 +269,6 @@
         \end{tabular}
         \caption{table c}
         \end{subtable}
-        % \caption{Caption}
-    % \end{table}
-    % \begin{table}
-    % \centering
         \bigskip
         \begin{subtable}
         \begin{tabular}{|c|c|c|c|c|c|c|}
@@ -290,6 +286,7 @@
         \end{subtable}
         \caption{tables for strings X=$\langle$ADAPT$\rangle$ and Y=$\langle$DBPT$\rangle$}
     \end{table}
+    \newpage
     \section{Construct the LCS}
     With the help of matirx b from LCS\_LENGTH, we can construct the LCS of X and Y. Starting from b[m,n], we can navigate the matrix according to the direction of each 'arrow':
     \begin{itemize}
