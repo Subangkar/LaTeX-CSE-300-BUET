@@ -69,9 +69,7 @@
     \newpage
     
     
-    \chapter{Subsequence}{\label{chap:subseq}}
-    % \section*{1. Form the possessive singular of nouns with ’s}
-    % \addcontentsline{toc}{section}{1. Form the possessive singular of nouns with ’s}
+    \chapter{Subsequence}
     \section{Subsequence}{
     \bigskip
     \subsection{Definition:}
@@ -194,6 +192,8 @@
         \item {\textbf{Bottom-up approach:}} Once we formulate the solution to a problem recursively as in terms of its sub-problems, we can try reformulating the problem in a bottom-up fashion: try solving the sub-problems first and use their solutions to build-on and arrive at solutions to bigger sub-problems. This is also usually done in a tabular form by iteratively generating solutions to bigger and bigger sub-problems by using the solutions to small sub-problems. For example, if we already know the values of $F_{41}$ and $F_{40}$, we can directly calculate the value of $F_{42}$.
     \end{itemize}
     
+    
+    
     \chapter{Solving LCS: Brute Force Technique}
     \section{Solution}
     Suppose we are to find LCS of string X and Y.
@@ -278,22 +278,13 @@
     only need last two rows. So we can keep last two rows using even,
     odd sequence. Thus giving memory complexity O(2·$|$Y$|$)
     
-    \chapter{CONCLUSION}{
-        \textit{Elements of Style} is a unique book on rules for composition writing. it gives in brief space the principal requirements of plain English style and concentrates attention on the rules of usage and principles of composition most commonly violated.
-        
-        \bigskip
-        
-        Despite its brief and well-structured features, this book is not completely well-explained on all topics. A little more rich collection of examples can make this book more helpful for the readers and writers.
-        
-        \bigskip
-        
-        As a basic textbook for learning composition writing and overcoming common mistakes, this book is a very good choice.
-        
-        \bigskip
-        
-        For any query, please contact : 
-        \href{http://aniksarkerbuet1997@gmail.com}{\textcolor{blue}{aniksarkerbuet1997@gmail.com}}
-    }
+    \chapter{Conclusion}
+    Longest Common Subsequence or LCS is a illustration of power of dynamic programming in problem solving. Without using DP we would have a exponential time complexity that is impossible to solve with existing computational power.
+    
+    \bigskip
+    However, this well known LCS problem is the basis of data comparison programs such as the diff utility, and has applications in bioinformatics. It is also widely used by revision control systems such as Git for reconciling multiple changes made to a revision-controlled collection of files.
+    
+    Again more complicated problems have been made easier with idea of LCS problem such that finding LCS of K-sequences, Longest Increasing Subsequence, Finding string of K-palindrome etc.
     
     \end{document}
     
