@@ -1,15 +1,31 @@
-\begin{algorithm}[H]
-\SetAlgoLined
-\KwResult{Write here the result }
- initialization\;
- \While{While condition}{
-  instructions\;
-  \eIf{condition}{
-   instructions1\;
-   instructions2\;
-   }{
-   instructions3\;
-  }
- }
- \caption{How to write algorithms}
+\begin{algorithm}
+\DontPrintSemicolon 
+\SetKwFunction{lcslength}{\textsc{LCS}\_LENGTH}
+\Indm\nonl\lcslength{$X, Y$}\\
+\Indp
+    $m := length[X]$\;
+    $n := length[Y]$\;
+    \For{$i := 1$ \textbf{to} $m$}{$c[i,0] := 0$}
+    \For{$j := 1$ \textbf{to} $n$}{$c[0,j] := 0$}
+    \For{$i := 1$ \textbf{to} $m$}
+    {
+        \For{$j := 1$ \textbf{to} $n$}
+        {
+            \If{$x_i=y_j$}
+            {
+                $c[i,j] :=  c[i-1,j-1]+1$\;
+                $b[i,j] :=  '\nwarrow'$\;
+            }
+            \ElseIf{$c[i-1,j] \geq c[i,j-1]$}
+            {
+                $c[i,j] :=  c[i-1,j]$\;
+                $b[i,j] :=  '\uparrow'$\;
+            }
+            \Else{
+                $c[i,j] :=  c[i,j-1]$\;
+                $b[i,j] :=  '\leftarrow'$\;
+            }
+        }
+    }
+    \Return{(c,b)}\;
 \end{algorithm}

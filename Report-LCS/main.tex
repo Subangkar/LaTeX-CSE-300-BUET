@@ -8,7 +8,7 @@
     \usepackage{algorithmic}
     \usepackage{listings}
     \usepackage{amsmath}
-    % \usepackage{algpseudocode}
+    \usepackage[noend]{algpseudocode}
     \usepackage[linesnumbered,noline,noend]{algorithm2e}
     \usepackage{subfiles}
     
@@ -17,12 +17,18 @@
     \newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
     \newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
     
+    
+    \SetNlSty{}{}{}
+    
+    \let\oldnl\nl% Store \nl in \oldnl
+    \newcommand\nonl{%
+      \renewcommand{\nl}{\let\nl\oldnl}}% Remove line number for one line
+    
+    
     \title{
     \line(1,0){300}
     \endgraf\bigskip
     \Huge
-    % \bfseries{A Report on}
-    % \endgraf\bigskip
     \emph{Longest Common Subsequence}
     \newline
     \line(1,0){300}
@@ -150,16 +156,8 @@
     \end{enumerate}
     
     The next procedure must also tell when there are no more candidates for the instance P, after the current one c. A convenient way to do that is to return a "null candidate", some conventional data value $\land$ that is distinct from any real candidate. Likewise the first procedure should return $\land$ if there are no candidates at all for the instance P. The brute-force method is then expressed by the algorithm.
-    ???????\\
-    ???????\\
-    ???????
-    % \begin{algorithmic}
-    % \State $c \gets first(P)$
-    % \While{ $c \neq \land$}{
-    %     \IF{valid(P,c)}{output(P, c)\;}
-    %     \State $c \gets next(P,c)$
-    % }
-    % \end{algorithmic}
+    \subfile{Brute-Force.tex}
+    
     
     \newpage
     \section{Dynamic Programming Approach}
@@ -178,7 +176,7 @@
     \subsection{Optimal Substructure}
     Optimal substructure means that the solution to a given optimization problem can be obtained by the combination of optimal solutions to its sub-problems. Such optimal substructures are usually described by means of recursion.
     \\
-    For example, given a graph G=(V,E), the shortest path p from a vertex u to a vertex v exhibits optimal substructure: take any intermediate vertex w on this shortest path p. If p is truly the shortest path, then it can be split into sub-paths p1 from u to w and p2 from w to v such that these, in turn, are indeed the shortest paths between the corresponding vertices (by the simple cut-and-paste argument described in ??????????????????????????????? Introduction to Algorithms). Hence, one can easily formulate the solution for finding shortest paths in a recursive manner, which is what the Bellman–Ford algorithm or the Floyd–Warshall algorithm does.
+    For example, given a graph G=(V,E), the shortest path p from a vertex u to a vertex v exhibits optimal substructure: take any intermediate vertex w on this shortest path p. If p is truly the shortest path, then it can be split into sub-paths p1 from u to w and p2 from w to v such that these, in turn, are indeed the shortest paths between the corresponding vertices (by the simple cut-and-paste argument). Hence, one can easily formulate the solution for finding shortest paths in a recursive manner, which is what the Bellman–Ford algorithm or the Floyd–Warshall algorithm does.
     \newpage
     \subsection{Overlapping Sub-Problems}
     \bigskip
@@ -212,6 +210,8 @@
     
     
     
+    
+    
     \chapter{Solving LCS: Dynamic Programming Approach}
     We already know the properties that are required for a problem to be eligible to be solved with dynamic programming . LCS exhibits both Optimal substructure and Overlapping sub-problems property. Hence we can use dynamic programming to solve it. Now we will discuss the method of solving LCS with dynamic programming in detail.
     \section{Stucture of LCS problem}
@@ -223,15 +223,18 @@
         \item If $x_n$ $\neq$ $y_m$ and $z_k$ $\neq$ $x_m$ then $Z_k$ is an LCS of $X_{m-1}$ and $Y_n$.
         \item If $x_n$ $\neq$ $y_m$ and $z_k$ $\neq$ $y_n$ then $Z_k$ is an LCS of $X_{m}$ and $Y_{n-1}$.
     \end{enumerate}
+    \textbf{Note:} $X_{m-1}=\langle x_1x_2..x_{m-1}\rangle$, $Y_{n-1} = \langle y_1y_2...y_{n-1}\rangle$ and $Z_{k-1}=\langle z_1 z_2...z_{k-1}\rangle$.
+    \newpage
     \section{Recursive Structure of the Subproblem}
     From the optimal substructure stated in the previous subsection, we know that, to find the LCS of X and Y, we just need to go through the following procedure:
     \begin{itemize}
         \item if $x_n$ = $y_m$, find the LCS of $X_{m-1}$ and $Y_{n-1}$ and then append $x_m$ (or $y_n$).
-        \item if $x_n$ $\neq$ $y_m$, find the LCS of $X_{m-1}$ and Y, and the LCS of X and $Y_{n-1}$, then pick the longer one.
+        \item if $x_n$ $\neq$ $y_m$, find the LCS of $X_{m-1}$ and $Y_n$, and the LCS of $X_m$ and $Y_{n-1}$, then pick the longer one.
     \end{itemize}
     
     We can see a overlapping subproblems attribute from this recursive structure. For example, when finding the LCS of X and Y, we may need to find the LCS of X and $Y_{n-1}$ and the LCS of $X_{m-1}$ and Y first; and these two both depend on one subproblem, to find the LCS of $X_{m-1}$ and $Y_{n-1}$.
     
+    \bigskip
     So let us build the recursive relations among the optimal values of the subproblems.
     Denote c[i,j] as the length of $X_i$ and $Y_j$. When i=0 or j=0, the LCS of $X_i$ and $Y_j$ is an empty sequence, so c[i,j]=0, otherwise the recursive relation can be defined as:
         \[ c[i,j] =  \begin{cases} 
@@ -256,8 +259,15 @@
         \item when b[i,j] = \leftarrow,~it~means~LCS($X_i,Y_j$) is the same as LCS(X$_i$,Y$_j$)
     \end{itemize}
     \subfile{PRINT-LCS.tex}
+    \newpage
     E.g., for two sequences X=$\langle$ADAPT$\rangle$ and Y=$\langle$DBPT$\rangle$, the results of LCS\_LENGTH() and PRINT-LCS() can be shown as:\\\\
     \subfile{SOLN_TABLE.tex}
+    \bigskip
+    Lets explain this diagram. Firstly, LCS\_LENGTH() computes matrix c and matrix b from X and Y, and the cell at the ith row and jth column stores the value of c[i,j] and the arrow pointing to next entry of b. At c[5,4], number 3 stands for the length of LCS$\langle DPT \rangle$. To re-construct the LCS, we just need to follow the arrow from the lower right corner. Each \nwarrow on~the~path~denotes~an~element~of~the~LCS.
+    
+    
+    So, according to the diagram, the procedure will finally print out: "DPT"
+    
     \section{Complexity}
     \begin{itemize}
         \item Each entity of the table can be computed in $\mathcal{O}(1)$ time
@@ -282,9 +292,9 @@
     Longest Common Subsequence or LCS is a illustration of power of dynamic programming in problem solving. Without using DP we would have a exponential time complexity that is impossible to solve with existing computational power.
     
     \bigskip
-    However, this well known LCS problem is the basis of data comparison programs such as the diff utility, and has applications in bioinformatics. It is also widely used by revision control systems such as Git for reconciling multiple changes made to a revision-controlled collection of files.
+    However, this well known LCS problem is the basis of data comparison programs such as the diff utility, and has applications in bioinformatics. It is also widely used by revision control systems such as Git for reconciling multiple changes made to a revision-controlled collection of files. Even in medical science LCS is an important problem. Fast DNA Sequence Clustering can be done based on LCS.  
     
-    Again more complicated problems have been made easier with idea of LCS problem such that finding LCS of K-sequences, Longest Increasing Subsequence, Finding string of K-palindrome etc.
+    Again more complicated problems have been made easier with idea of LCS problem such that finding LCS of K-sequences, Longest Increasing Subsequence, Finding if string is K-palindrome etc.
     
     \end{document}
     
